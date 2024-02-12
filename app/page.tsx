@@ -21,7 +21,7 @@ const line3 = `Your laughter's contagious, like a joyful tune.
 `;
 const line4 = `Your eyes are like stars, shining brighter than the romantic moon.
 `;
-function valentine() {
+function Valentine() {
 
   const router = useRouter()
 
@@ -134,4 +134,4 @@ function valentine() {
   );
 }
 
-export default valentine;
+export default Valentine;
