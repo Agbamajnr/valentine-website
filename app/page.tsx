@@ -1,3 +1,5 @@
+'use client';
+
 import { HeartFilledIcon } from "@/components/ui/icons";
 import { Meteors } from "@/components/ui/meteors";
 import { SparklesCore } from "@/components/ui/sparkles";
@@ -7,6 +9,8 @@ import Link from "next/link";
 import { BsHeartbreak } from "react-icons/bs";
 import { GiHeartNecklace } from "react-icons/gi";
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
+
 
 const line1 = `
 Roses are red, violets are blue,
@@ -18,6 +22,48 @@ const line3 = `Your laughter's contagious, like a joyful tune.
 const line4 = `Your eyes are like stars, shining brighter than the romantic moon.
 `;
 function valentine() {
+
+  const router = useRouter()
+
+
+  let clickCount = 0;
+
+  const noClick = () => {
+    clickCount += 1;
+    if (typeof window && clickCount < 5) {
+      const yesBtn = document.querySelector('.yes-btn') as HTMLButtonElement;
+
+      if (yesBtn.style.height.length > 0) {
+        let getHeightValue = Number(yesBtn.style.height.substring(0, yesBtn.style.height.length - 2))
+        let getWidthValue = Number(yesBtn.style.width.substring(0, yesBtn.style.width.length - 2))
+
+        yesBtn.style.height = `${getHeightValue + 10}px`
+        yesBtn.style.width = `${getWidthValue + 10}px`
+
+      } else {
+        yesBtn.style.height = '60px'
+        yesBtn.style.width = '160px'
+      }
+
+
+      if (clickCount === 1) {
+        yesBtn.textContent = 'I mean Yes❤️'
+      }
+      if (clickCount === 2) {
+        yesBtn.textContent = 'You can still say Yes'
+      }
+      if (clickCount === 3) {
+        yesBtn.textContent = "Don't hurt me. Say YES"
+      }
+      if (clickCount === 4) {
+        yesBtn.textContent = "Are you sure? Pls say Yes"
+      }
+    } else {
+      router.push('/will/no')
+    }
+
+  }
+
   return (
     <div className="h-screen relative w-full bg-black flex flex-col items-center justify-center overflow-hidden rounded-md">
       <div className="w-full absolute inset-0 h-screen">
@@ -45,9 +91,9 @@ function valentine() {
               <p className="font-normal text-base text-slate-500 mb-4 relative z-50">
                 Meteors blaze, shooting stars they gleam,
                 <br></br>
-                In your eyes, I find my dream.
+                In your eyes, I find my dreams.
                 <br></br>
-                With every twinkle, my heart it beams,
+                With every twinkle, my heart beams,
                 <br></br>
                 Will you be my valentine, in love&apos;s cosmic stream?
                 <br></br>
@@ -57,7 +103,7 @@ function valentine() {
                   {" "}
                   <Button
                     as={Link}
-                    className="text-sm font-normal text-default-600 bg-default-100 "
+                    className="text-sm yes-btn font-normal text-default-600 bg-default-100 "
                     href={"/will/you"}
                     startContent={<HeartFilledIcon className="text-danger" />}
                     variant="flat"
@@ -67,9 +113,8 @@ function valentine() {
                 </div>
                 <div>
                   <Button
-                    as={Link}
+                    onPress={() => noClick()}
                     className="text-sm font-normal text-default-600 bg-default-100 hover:bg-opacity-0 hover:transform hover:scale-x-50 hover:scale-y-50 duration-75"
-                    href={"/will/no"}
                     startContent={
                       <BsHeartbreak size={"22"} className="text-danger" />
                     }

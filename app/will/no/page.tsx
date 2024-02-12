@@ -3,7 +3,7 @@ import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 
 export default function Home() {
   const line1 = `"Roses are red, violets are blue,
-    Though my heart's heavy, I still wish you true.
+    Though my heart's heavy, I'll always love you Aein.
     "`;
   return (
     <BackgroundGradientAnimation>
